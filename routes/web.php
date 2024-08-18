@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProdutoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,6 +14,11 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+//php artisan route:list lista todas as rotas
+//php artisan route:cache criar um arquivo de cache de rota, deixa as rotas mais rapidos
+//php artisan route:clear serve para remover o arquivo de cache
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -109,4 +116,12 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'],function () {
 });
 
 //Rota com controller
-//Route::get('/', [ProdutoController::class, 'index']);
+//Informar o namespace
+Route::get('/', [ProdutoController::class, 'index'])->name('produto.index');
+
+Route::get('/produto/{id?}', [ProdutoController::class, 'show'])->name('produto.show');
+
+//Resources: recursos genericos
+//php artisan make:controller ProductController --resource
+Route::resource('products',ProductController::class);
+
