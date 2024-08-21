@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProdutoController;
+use App\Http\Controllers\SiteController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -117,7 +118,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'],function () {
 
 //Rota com controller
 //Informar o namespace
-Route::get('/', [ProdutoController::class, 'index'])->name('produto.index');
 
 Route::get('/produto/{id?}', [ProdutoController::class, 'show'])->name('produto.show');
 
@@ -125,3 +125,5 @@ Route::get('/produto/{id?}', [ProdutoController::class, 'show'])->name('produto.
 //php artisan make:controller ProductController --resource
 Route::resource('products',ProductController::class);
 
+Route::get('/', [SiteController::class, 'index'])->name('site.index');
+Route::get('/produtos/{slug}', [SiteController::class, 'details'])->name('site.details');
