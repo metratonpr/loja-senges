@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\CarrinhoController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\SiteController;
@@ -133,3 +135,12 @@ Route::get('/categoria/{id}', [SiteController::class, 'categoria'])->name('site.
 
 Route::get('/carrinho',[CarrinhoController::class, 'carrinhoLista'])->name('site.carrinho');
 Route::post('/carrinho',[CarrinhoController::class, 'adcionaCarrinho'])->name('site.addcarrinho');
+Route::post('/carrinho/remove',[CarrinhoController::class, 'removeCarrinho'])->name('site.removecarrinho');
+Route::post('/carrinho/atualiza',[CarrinhoController::class, 'atualizaCarrinho'])->name('site.atualizacarrinho');
+Route::get('/carrinho/limpar',[CarrinhoController::class, 'limparCarrinho'])->name('site.limparcarrinho');
+
+Route::view('/login','login.form')->name('login.form');
+Route::post('/auth',[LoginController::class, 'auth'])->name('login.auth');
+Route::get('/logout',[LoginController::class,'logout'])->name('login.logout');
+
+Route::get('/admin/dashboard',[DashboardController::class,'index'])->name('admin.dashboard')->middleware(['auth']);
